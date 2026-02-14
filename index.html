@@ -98,32 +98,69 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* ===== Cat Image ===== */
-        .cat-container {
+        /* ===== Photo Section ===== */
+        .photos-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
             margin: 10px auto 20px;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid #e91e63;
-            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
-            animation: pulse 2s ease-in-out infinite;
         }
 
-        .cat-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .heart-frame {
+            width: 160px;
+            height: 155px;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 6px 18px rgba(233, 30, 99, 0.35));
             transition: transform 0.3s ease;
         }
 
-        .cat-container:hover img {
-            transform: scale(1.1);
+        .heart-frame:hover {
+            transform: scale(1.08);
+        }
+
+        .heart-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: path('M80 140 C80 140, 0 95, 0 50 C0 20, 25 0, 50 0 C65 0, 75 10, 80 25 C85 10, 95 0, 110 0 C135 0, 160 20, 160 50 C160 95, 80 140, 80 140Z');
+        }
+
+        .heart-frame::before {
+            content: '';
+            position: absolute;
+            top: -3px; left: -3px;
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            background: linear-gradient(135deg, #e91e63, #ff5252, #ff4081);
+            clip-path: path('M83 146 C83 146, 0 98, 0 52 C0 20, 26 -3, 52 -3 C68 -3, 78 8, 83 26 C88 8, 98 -3, 114 -3 C140 -3, 166 20, 166 52 C166 98, 83 146, 83 146Z');
+            z-index: -1;
+        }
+
+        .photos-label {
+            font-size: 12px;
+            color: #e91e63;
+            margin-top: 4px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .photo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photos-heart-between {
+            font-size: 28px;
+            animation: heartBeat 1.2s ease-in-out infinite;
+            margin-top: -15px;
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3); }
-            50% { box-shadow: 0 8px 40px rgba(233, 30, 99, 0.55); }
+            0%, 100% { filter: drop-shadow(0 6px 18px rgba(233, 30, 99, 0.35)); }
+            50% { filter: drop-shadow(0 8px 30px rgba(233, 30, 99, 0.6)); }
         }
 
         /* ===== Title ===== */
@@ -318,20 +355,32 @@
             margin-top: 10px;
         }
 
-        .celeb-cat {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            overflow: hidden;
+        .celeb-photos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
             margin: 20px auto;
-            border: 4px solid #e91e63;
-            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
         }
 
-        .celeb-cat img {
+        .celeb-photos .heart-frame {
+            width: 130px;
+            height: 126px;
+        }
+
+        .celeb-photos .heart-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            clip-path: path('M65 114 C65 114, 0 77, 0 41 C0 16, 20 0, 41 0 C53 0, 61 8, 65 20 C69 8, 77 0, 89 0 C110 0, 130 16, 130 41 C130 77, 65 114, 65 114Z');
+        }
+
+        .celeb-photos .heart-frame::before {
+            clip-path: path('M68 120 C68 120, 0 80, 0 43 C0 16, 21 -3, 43 -3 C56 -3, 64 6, 68 20 C72 6, 80 -3, 93 -3 C115 -3, 136 16, 136 43 C136 80, 68 120, 68 120Z');
+        }
+
+        .celeb-photos .photos-heart-between {
+            font-size: 22px;
         }
 
         /* ===== Confetti ===== */
@@ -407,7 +456,14 @@
             .card { padding: 30px 25px; }
             .subtitle { font-size: 28px; }
             .title { font-size: 22px; }
-            .cat-container { width: 140px; height: 140px; }
+            .heart-frame { width: 120px; height: 116px; }
+            .heart-frame img {
+                clip-path: path('M60 105 C60 105, 0 71, 0 38 C0 15, 19 0, 38 0 C49 0, 56 8, 60 19 C64 8, 71 0, 82 0 C101 0, 120 15, 120 38 C120 71, 60 105, 60 105Z');
+            }
+            .heart-frame::before {
+                clip-path: path('M63 111 C63 111, 0 74, 0 40 C0 15, 20 -3, 40 -3 C52 -3, 59 6, 63 19 C67 6, 74 -3, 86 -3 C106 -3, 126 15, 126 40 C126 74, 63 111, 63 111Z');
+            }
+            .photos-container { gap: 10px; }
             .btn { padding: 12px 30px; font-size: 16px; }
             .celebration-card { padding: 35px 25px; }
             .celeb-title { font-size: 32px; }
@@ -423,8 +479,20 @@
     <div class="card" id="mainCard">
         <div class="title-heart">💖</div>
 
-        <div class="cat-container">
-            <img src="./cat.png" alt="Our Cat 🐱" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23fce4ec%22 width=%22200%22 height=%22200%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-size=%2260%22>🐱</text></svg>'">
+        <div class="photos-container">
+            <div class="photo-wrapper">
+                <div class="heart-frame">
+                    <img src="./IMG_7693.jpg" alt="My Love 💕">
+                </div>
+                <div class="photos-label">Riew 💕</div>
+            </div>
+            <div class="photos-heart-between">💗</div>
+            <div class="photo-wrapper">
+                <div class="heart-frame">
+                    <img src="./cat.png" alt="Our Cat 🐱">
+                </div>
+                <div class="photos-label">น้องแมว 🐱</div>
+            </div>
         </div>
 
         <p class="title">สุดที่รัก <span class="name">Riew</span> 💗</p>
@@ -449,8 +517,14 @@
         <div class="celebration-card">
             <div class="celeb-emoji">💖</div>
             <h1 class="celeb-title">Yay!! 🎉🥰</h1>
-            <div class="celeb-cat">
-                <img src="./cat.png" alt="Our Cat 🐱" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23fce4ec%22 width=%22200%22 height=%22200%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-size=%2260%22>🐱</text></svg>'">
+            <div class="celeb-photos">
+                <div class="heart-frame">
+                    <img src="./IMG_7693.jpg" alt="My Love 💕">
+                </div>
+                <div class="photos-heart-between">💗</div>
+                <div class="heart-frame">
+                    <img src="./cat.png" alt="Our Cat 🐱">
+                </div>
             </div>
             <p class="celeb-message">
                 รู้อยู่แล้วว่า <span class="name">Riew</span> ต้องตอบ Yes! 💗<br><br>
