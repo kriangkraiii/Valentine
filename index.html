@@ -796,10 +796,22 @@
         // ===== INIT =====
         createFloatingHearts();
 
-        // Try to play music on first interaction
-        document.addEventListener('click', () => {
-            if (!musicPlaying) playMusic();
-        }, { once: true });
+        // Auto-play music on page load (retry until browser allows it)
+        function tryAutoplay() {
+            bgMusic.play().then(() => {
+                musicPlaying = true;
+                musicBtn.classList.add('playing');
+                musicBtn.textContent = '🎶';
+            }).catch(() => {
+                // Browser blocked autoplay, retry on first user interaction
+                ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+                    document.addEventListener(evt, () => {
+                        if (!musicPlaying) playMusic();
+                    }, { once: true });
+                });
+            });
+        }
+        tryAutoplay();
     </script>
 </body>
 </html>
